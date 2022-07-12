@@ -1,0 +1,787 @@
+/* :root{
+    font-size: 100%;
+} */
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+*::before,
+*::after{
+    content: '';
+    display: block;
+    position: absolute;
+}
+li{
+    list-style-type: none;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3.7rem;
+}
+.baseGround{
+    width: 520px;
+    height: 600px;
+    display: block;
+    position: relative;
+    background-color:#ccc;
+    transform-style: preserve-3d;
+    transform:perspective(800px) rotateX(0deg) rotateY(5deg) rotate(-40deg);
+    animation: groundMove 15s 4s forwards linear;
+}
+@keyframes groundMove{
+    0%{
+        transform:perspective(800px) rotateX(0deg) rotateY(5deg) rotate(-40deg);
+    }
+    50%{
+        transform:perspective(800px) rotateX(30deg) rotateY(5deg) rotate(40deg);
+    }
+    100%{
+        transform:perspective(800px) rotateX(55deg) rotateY(5deg) rotate(-10deg);
+    }
+}
+.baseGround::before,.baseGround::after{
+    bottom: 0;
+    width: 520px;
+    height: 30px;
+    background-image: linear-gradient(#ccc,#acabab,rgb(121, 117, 117));
+    transform-origin: bottom;
+    transform: rotateX(90deg) translateY(2px);
+}
+.baseGround::after{
+    left: 0;
+    width: 30px;
+    height: 600px;
+    transform-origin: left;
+    transform: rotateY(90deg) translateY(1px);
+}
+/******************* road */
+.baseGround .theRoad{
+    position: absolute;
+    left: 50%;
+    transform:translate(-50%,0);
+    display: block;
+    width: 200px;
+    height: 100%;
+    background-color: #7f7e7e;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+.baseGround .theRoad::before{
+    width: 2px;
+    height: 100%;
+    background-color: #fff;
+    left: 2.5px;
+}
+.baseGround .theRoad::after{
+    width: 2px;
+    height: 100%;
+    background-color: #fff;
+    right: 2.5px;
+}
+/************************ cars */
+.baseGround .theRoad > .car1,
+.baseGround .theRoad > .car2{
+    width: 40px;
+    height: 50px;
+    display: block;
+    background-color: #832828;
+    position: absolute;
+    top: -50%;
+    left: 15%;
+    z-index: 2;
+    transform-style: preserve-3d;
+    box-shadow: -30px 10px 30px #333232;
+    animation: car1 infinite 10s 7s linear;
+}
+@keyframes car1{
+    0%,10%,20%,30%,40%,50%,80%,90%,100%{
+        transform: scaleX(1) scaleY(1);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95%{
+        transform: scaleX(1.08) scaleY(1.1);
+    }
+    60%,70%{
+        top: 30%;
+        transform: scaleX(1) scaleY(1);
+    }
+    100%{
+        top: 130%;
+    }
+}
+.baseGround .theRoad > .car2{
+    background-color: #285183;
+    animation: car2 infinite 10s 4s linear;
+}
+@keyframes car2 {
+    0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100%{
+        transform: scaleX(1) scaleY(1);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95%{
+        transform: scaleX(1.08) scaleY(1.1);
+    }
+    100%{
+        top: 130%;
+    }
+}
+.baseGround .theRoad > .car3,
+.baseGround .theRoad > .car4{
+    width: 40px;
+    height: 50px;
+    display: block;
+    background-color: #b4b42e;
+    position: absolute;
+    bottom: -50%;
+    right: 15%;
+    z-index: 2;
+    transform-style: preserve-3d;
+    transform:perspective(800px) translateZ(200px);
+    box-shadow: -30px -10px 30px #333232;
+    animation: car4 infinite 11s 6s linear;
+}
+@keyframes car4 {
+    0%,10%,20%,30%,40%,50%,80%,90%,100%{
+        transform: scaleX(1) scaleY(1);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95%{
+        transform: scaleX(1.08) scaleY(1.1);
+    }
+    60%,70%{
+        bottom: 30%;
+        transform: scaleX(1) scaleY(1);
+    }
+    100%{
+        bottom: 130%;
+    }
+}
+.baseGround .theRoad > .car4{
+    background-color: #a53b92;
+    animation: car3 11s 4s infinite linear;
+}
+@keyframes car3{
+    0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100%{
+        transform: scaleX(1) scaleY(1);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95%{
+        transform: scaleX(1.05) scaleY(1.1);
+    }
+    100%{
+        bottom: 130%;
+    }
+}
+/******************** front and back windshield */
+.baseGround .theRoad > .car1::before,
+.baseGround .theRoad > .car2::before,
+.baseGround .theRoad > .car3>span:nth-of-type(2)::after,
+.baseGround .theRoad > .car4>span:nth-of-type(2)::after{
+    width: 40.6px;
+    height: 30px;
+    background-color: #333232;
+    bottom: 0px;
+    left: -2%;
+    transform-origin: bottom;
+    transform:perspective(800px) rotateX(140deg) translateZ(1px);
+}
+.baseGround .theRoad > .car3::before,
+.baseGround .theRoad > .car4::before{
+    width: 40px;
+    height: 30px;
+    background-color: #333232;
+    bottom: 0;
+    left: -.5px;
+    transform-origin: bottom;
+    transform: rotateX(110deg);
+}
+.baseGround .theRoad > .car3>span:nth-of-type(2)::after,
+.baseGround .theRoad > .car4>span:nth-of-type(2)::after{
+    transform:perspective(800px) rotateX(112deg) translateZ(1px);
+}
+/******************* The left side of the car */
+.baseGround .theRoad > .car1::after,
+.baseGround .theRoad > .car2::after{
+    width: 20px;
+    height: 100px;
+    background-color: #a12626;
+    left: 0;
+    transform-origin: left;
+    transform: rotateY(100deg);
+}
+.baseGround .theRoad > .car2::after{
+    background-color: #285183;
+}
+.baseGround .theRoad > .car3::after,
+.baseGround .theRoad > .car4::after{
+    width: 20px;
+    height: 99px;
+    background-color: #b4b42e;
+    left: 0;
+    transform-origin: left;
+    transform: rotateY(100deg) translateY(-40px);
+}
+.baseGround .theRoad > .car4::after{
+    background-color: #a53b92;
+}
+/********************** Tires */
+.baseGround .theRoad > .car1>span:nth-of-type(1),
+.baseGround .theRoad > .car2>span:nth-of-type(1){
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #000;
+    transform-origin: left;
+    transform: rotateY(80deg) translateZ(-7px) translateY(7px);
+}
+.baseGround .theRoad > .car1>span:nth-of-type(1)::after,
+.baseGround .theRoad > .car2>span:nth-of-type(1)::after{
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #000;
+    transform-origin: left;
+    transform: translateZ(2px) translateY(70px);
+}
+.baseGround .theRoad > .car3>span:nth-of-type(1),
+.baseGround .theRoad > .car3>span:nth-of-type(1)::after,
+.baseGround .theRoad > .car4>span:nth-of-type(1),
+.baseGround .theRoad > .car4>span:nth-of-type(1)::after{
+    position: absolute;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #000;
+    transform-origin: left;
+    transform: translateZ(5px) translateY(38px) translateX(-7px) rotateY(70deg);
+}
+.baseGround .theRoad > .car3>span:nth-of-type(1)::after,
+.baseGround .theRoad > .car4>span:nth-of-type(1)::after{
+    transform: translateZ(5px) translateY(-50px) translateX(-2px) rotateY(10deg);
+}
+/************************ Hood */
+.baseGround .theRoad > .car1>span:nth-of-type(2),
+.baseGround .theRoad > .car2>span:nth-of-type(2){
+    display: block;
+    position: absolute;
+    bottom:-100%;
+    width: 39px;
+    height: 30px;
+    background-color: #a12626;
+}
+.baseGround .theRoad > .car2>span:nth-of-type(2){
+    background-color: #285183;
+}
+.baseGround .theRoad > .car3>span:nth-of-type(2),
+.baseGround .theRoad > .car4>span:nth-of-type(2){
+    display: block;
+    position: absolute;
+    top:-80%;
+    width: 39px;
+    height: 30px;
+    background-color: #b4b42e;
+}
+.baseGround .theRoad > .car4>span:nth-of-type(2){
+    background-color: #a53b92;
+}
+/******************* Front Bumper */
+.baseGround .theRoad > .car1>span:nth-of-type(2)::after,
+.baseGround .theRoad > .car2>span:nth-of-type(2)::after{
+    bottom: -10px;
+    left: -8%;
+    width: 42.5px;
+    height: 15px;
+    background-color: #a12626;
+    transform-origin: bottom;
+    transform:perspective(800px) rotateX(45deg) translateY(-6px);
+    box-shadow: inset 2px 2px 10px #5a1e1e;
+}
+.baseGround .theRoad > .car2>span:nth-of-type(2)::after{
+    background-color: #285183;
+    box-shadow: inset 2px 2px 10px #072345;
+}
+/******************** Headlights */
+.baseGround .theRoad > .car1>span:nth-of-type(2)::before,
+ .baseGround .theRoad > .car1>span:nth-of-type(3),
+ .baseGround .theRoad > .car2>span:nth-of-type(2)::before,
+ .baseGround .theRoad > .car2>span:nth-of-type(3){
+    position: absolute;
+    bottom:5px;
+    left: 3%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50px;
+    background-image: radial-gradient(#fff,rgb(205, 203, 203),rgb(142, 140, 140));
+    z-index: 3;
+    transform:perspective(800px) translateY(10px);
+}
+.baseGround .theRoad > .car1>span:nth-of-type(3),
+.baseGround .theRoad > .car2>span:nth-of-type(3){
+    top:87px;
+    left: 29px;
+}
+/********************* Road lines */
+.baseGround .theRoad .lines{
+    position: absolute;
+    top: 50%;left: 50%;
+    transform: translate(-50%,-50%);
+    display: block;
+    background-color: #7f7e7e;
+    height: 102%;
+    border: 6px double yellow;
+}
+.baseGround .theRoad .lines::before{
+    transform: translateX(48px);
+    height: inherit;
+    border: 3px dashed #fff;
+}
+.baseGround .theRoad .lines::after{
+    transform: translateX(-52px);
+    height: inherit;
+    border: 3px dashed #fff;
+}
+/****************** left side park */
+.baseGround .leftSidePark{
+    width: 160px;
+    height: 100%;
+    background-color: rgb(117, 207, 96);
+    position: absolute;
+    left: 0;
+    transform-style: preserve-3d;
+}
+/************************ trees */
+.baseGround .leftSidePark>div:not(:nth-of-type(5)){
+    width: 30px;
+    height: 0px;
+    background-color: #5a1e1e;
+    position: absolute;
+    top: 10%;
+    left:55%;
+    transform-origin: bottom;
+    transform: perspective(800px) rotateX(-90deg) rotateY(-20deg) translateY(10px);
+    box-shadow: inset -10px 10px 20px rgb(51, 12, 12), -20px -5px 30px rgba(0, 0, 0, 0.621);
+    transform-style: preserve-3d;
+    animation: tree 1.5s 4s forwards linear;
+}
+@keyframes tree{
+    70%{
+        transform:scaleY(1.4) scaleX(1.4) perspective(800px) rotateX(-90deg) rotateY(-20deg) translateY(0);
+    }
+    80%{
+        transform: scaleY(1.2) scaleX(1.2) perspective(800px) rotateX(-90deg) rotateY(-20deg) translateY(0);
+    }
+    90%{
+        transform: scaleY(1.25) scaleX(1.25) perspective(800px) rotateX(-90deg) rotateY(-20deg) translateY(0);
+    }
+    100%{
+        transform: scaleY(1) scaleX(1) perspective(800px) rotateX(-90deg) rotateY(-20deg) translateY(0);
+        height: 60px;
+    }
+}
+.baseGround .leftSidePark>div::after{
+    width: 20px;
+    height: 100%;
+    background-color: #481717;
+    right: 0;
+    transform-origin: right;
+    transform:perspective(800px) rotateY(-90deg) translateZ(1px);
+    box-shadow: inset -10px 10px 20px rgb(51, 12, 12);
+}
+.baseGround .leftSidePark>div span{
+    width: 55px;
+    height: 60px;
+    position: absolute;
+    top: -40%;
+    left: -35%;
+    display: block;
+    background-color: #207b18;
+    transform-style: preserve-3d;
+    transform: translateX(-4px);
+}
+.baseGround .leftSidePark>div span::after{
+    width: 47px;
+    height: inherit;
+    background-color: #207b18;
+    right: 0;
+    transform-origin: right;
+    transform: rotateY(-90deg) translateZ(.5px);
+}
+.baseGround .leftSidePark>div span::before{
+    width: inherit;
+    height: 47px;
+    top: 0;
+    transform-origin: top;
+    background-color: #207b18;
+    transform: rotateX(-90deg);
+}
+.baseGround .leftSidePark>div span span{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+}
+.baseGround .leftSidePark>div span span:nth-of-type(2){
+    top: 50%;
+    left: 80%;
+}
+.baseGround .leftSidePark>div span span:nth-of-type(3){
+    top: 10%;
+    left: 70%;
+}
+.baseGround .leftSidePark>div span span:nth-of-type(4){
+    top: 70%;
+    left: 40%;
+}
+.baseGround .leftSidePark>div:nth-of-type(3) span span,
+.baseGround .leftSidePark>div:nth-of-type(4) span span{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    position: absolute;
+    top: 60%;
+    left: 70%;
+}
+.baseGround .leftSidePark>div:nth-of-type(3) span span:nth-of-type(2),
+.baseGround .leftSidePark>div:nth-of-type(4) span span:nth-of-type(2){
+    top: 40%;
+    left: 20%;
+}
+.baseGround .leftSidePark>div:nth-of-type(3) span span:nth-of-type(3),
+.baseGround .leftSidePark>div:nth-of-type(4) span span:nth-of-type(3){
+    top: 10%;
+    left: 55%;
+}
+.baseGround .leftSidePark>div span span::before{
+    top: -35%;
+    left: 40%;
+    height: 5px;
+    width: 2px;
+    background-color: #5a1e1e;
+    display: block;
+    transform-origin: unset;
+    transform: unset;
+}
+.baseGround .leftSidePark>div:nth-of-type(2){
+    top: 80%;
+    left: 70%;
+}
+.baseGround .leftSidePark>div:nth-of-type(3){
+    top: 30%;
+    left: 20%;
+    box-shadow:inset -10px 10px 20px rgb(51, 12, 12), -10px 0 40px rgb(0, 0, 0);
+}
+.baseGround .leftSidePark>div:nth-of-type(3) span,
+.baseGround .leftSidePark>div:nth-of-type(4) span{
+    height:37px;
+    top: -10%;
+}
+.baseGround .leftSidePark>div:nth-of-type(4){
+    top: 86%;
+    left: 10%;
+    box-shadow:inset -10px 10px 20px rgb(51, 12, 12), -10px 0 40px rgb(0, 0, 0);
+}
+.baseGround .leftSidePark .pool{
+    width: 90px;
+    height: 120px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    background-color: #285c9be7;
+    transform: translate(-50%,-50%);
+    border: 15px groove rgb(205, 202, 202);
+    box-shadow: inset -20px 0px 30px rgba(255, 255, 255, 0.233);
+}
+/********************** right side buildings */
+.baseGround .rightSideBuild{
+    width: 160px;
+    height: 0;
+    position: absolute;
+    right: 0;
+    transform-style: preserve-3d;
+    transform: translateZ(-300px);
+    animation: buildings 2s 4s linear forwards;
+    overflow: hidden;
+}
+@keyframes buildings{
+    70%{
+        transform:scaleY(1.4) scaleX(1.4) ;
+    }
+    80%{
+        transform: scaleY(1.2) scaleX(1.2) ;
+    }
+    90%{
+        transform: scaleY(1.25) scaleX(1.25) ;
+    }
+    100%{
+        transform: scaleY(1) scaleX(1) translateZ(0px);
+        overflow: visible;
+        height: 100%;
+    }
+}
+/************************* buildings */
+
+/**************** build1 */
+.baseGround .rightSideBuild>div{
+    width: 120px;
+    height: 210px;
+    position: absolute;
+    top: 0;
+    left: 20%;
+    background-image:repeating-linear-gradient(45deg , #ff0000 90%,rgb(85, 30, 30));
+    transform-origin: bottom;
+    transform: rotateX(-90deg) rotateY(0deg);
+    transform-style: preserve-3d;
+}
+.baseGround .rightSideBuild>div::after{
+    width: inherit;
+    height: inherit;
+    left: 0;
+    top: 0;
+    background-image:repeating-linear-gradient(45deg , #a10e0e 90%,rgb(85, 30, 30));
+    transform-origin: left;
+    transform:rotateY(90deg) ;
+}
+.baseGround .rightSideBuild>div::before{
+    width: inherit;
+    height: 58%;
+    top:0;
+    left: 0;
+    transform-origin: top;
+    transform: rotateX(-90deg);
+    background-color: #373737;
+    border: 15px groove #373737;
+}
+.baseGround .rightSideBuild>div span:nth-of-type(1){
+    width: 40px;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(142, 141, 141);
+    transform-origin: left;
+    transform: rotateY(91deg) translateX(35px);
+    border-radius: 6px;
+}
+.baseGround .rightSideBuild>div span:nth-of-type(1)::after{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    right: 2%;
+    top: 50%;
+    background-color: #000;
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(2){
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left:10%;
+    background-color: #3c3c3c;
+    transform-style: preserve-3d;
+    transform-origin: top;
+    transform:perspective(800px) rotateX(-90deg) translateY(10px) translateZ(-7px);
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(2)::after,
+.baseGround .rightSideBuild>div>span:nth-of-type(2)::before{
+    width: 7px;
+    height: inherit;
+    top: 0;
+    left: 0;
+    background-color: #333333;
+    transform-origin: left;
+    transform: rotateY(-90deg);
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(2)::before{
+    width: inherit;
+    height: 7px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom;
+    transform: rotateX(-90deg) translateZ(-7px);
+    background-color: #4c4c4c;
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(3){
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -13px;
+    left:35%;
+    background-color: #3c3c3c;
+    transform-style: preserve-3d;
+    transform-origin: top;
+    transform:perspective(800px) rotateX(-90deg) translateY(10px) translateZ(-7px);
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(3)::after,
+.baseGround .rightSideBuild>div>span:nth-of-type(3)::before{
+    width: 7px;
+    height: inherit;
+    top: 0;
+    left: 0;
+    background-color: #333333;
+    transform-origin: left;
+    transform: rotateY(-90deg);
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(3)::before{
+    width: inherit;
+    height: 7px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom;
+    transform: rotateX(-90deg) translateZ(-7px);
+    background-color: #4c4c4c;
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(4){
+    width: 5px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left:10%;
+    background-color: #4c4c4c;
+    transform-style: preserve-3d;
+    transform-origin: top;
+    transform:perspective(800px) rotateX(-180deg) rotateY(30deg) translateY(30px) translateX(-20px);
+}
+.baseGround .rightSideBuild>div>span:nth-of-type(5){
+    width: 5px;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    left:10%;
+    background-color: #4c4c4c;
+    transform-style: preserve-3d;
+    transform-origin: top;
+    transform:perspective(800px) rotateX(-180deg) rotateY(30deg) translateY(35px);
+}
+/****************** build2 */
+.baseGround .rightSideBuild>div:nth-of-type(2){
+    width: 98px;
+    height: 170px;
+    position: absolute;
+    top: 35%;
+    left: 20%;
+    background-image:repeating-linear-gradient(45deg , #354ffa 90%,#0e0e0e);
+    transform-origin: bottom;
+    transform: rotateX(-90deg) rotateY(0deg);
+    transform-style: preserve-3d;
+}
+.baseGround .rightSideBuild>div:nth-of-type(2):before{
+    border: 10px groove #373737;
+}
+.baseGround .rightSideBuild>div:nth-of-type(2):after{
+    background-image:repeating-linear-gradient(45deg , #0e0ea1 90%,#0e0e0e);
+}
+.baseGround .rightSideBuild>div:nth-of-type(2)>span:nth-of-type(2){
+    transform:perspective(800px) rotateX(-90deg) translateY(60px) translateZ(-7px);
+}
+.baseGround .rightSideBuild>div:nth-of-type(2)>span:nth-of-type(3){
+    width: 35px;
+    height: 35px;
+    top: 0;
+    left:40%;
+}
+/******************* build3 */
+.baseGround .rightSideBuild>div:nth-of-type(3){
+    width: 140px;
+    height: 250px;
+    position: absolute;
+    top: 55%;
+    left: 10%;
+    background-image:repeating-linear-gradient( #00fffb 90%,rgb(30, 60, 85));
+}
+.baseGround .rightSideBuild>div:nth-of-type(3):after{
+    background-image:repeating-linear-gradient( #0b7371 90%,rgb(30, 60, 85));
+}
+.baseGround .rightSideBuild>div:nth-of-type(3)>span:nth-of-type(3){
+    height: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************ LOADING */
+body .pageLoading{
+    width: 100%;
+    height: 110vh;
+    position: absolute;
+    opacity: 1;
+    background-image: linear-gradient(to bottom ,#554a4af5 ,#3b3a3af8 ,#545353);
+    z-index: 3;
+    animation: loadingAnimation .4s 4s forwards;
+    visibility: visible;
+  }
+  @keyframes loadingAnimation{
+    to{
+        opacity: 0;
+        visibility: hidden;
+    }
+  }
+  body .pageLoading h2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) translateY(400px);
+    -webkit-transform: translate(-50%,-50%) translateY(400px);
+    text-shadow:-3px 3px 10px #000000;
+    background-image: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 7rem;
+    animation: textAnimation 3s forwards cubic-bezier(.79,2.01,.41,-0.02);
+    -webkit-animation: textAnimation 2.8s forwards cubic-bezier(.79,2.01,.41,-0.02);
+  }
+  @keyframes textAnimation{
+    to{
+        transform:translate(-50%,-50%) translateY(0);
+        -webkit-transform:translate(-50%,-50%) translateY(0);
+    }
+  }
